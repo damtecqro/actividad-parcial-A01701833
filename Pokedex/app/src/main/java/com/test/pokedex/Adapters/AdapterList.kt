@@ -1,6 +1,10 @@
 package com.test.pokedex.Adapters
 
 import android.content.Context
+import androidx.core.content.ContextCompat.startActivity
+import com.test.pokedex.Activities.ActivityDetail
+import android.widget.LinearLayout
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -45,15 +49,22 @@ class AdapterList :RecyclerView.Adapter<AdapterList.ViewHolder>() {
     class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         private var imagePokemon: ImageView = view.findViewById(R.id.pokemon_image)
         private var namePokemon: TextView   = view.findViewById(R.id.pokemon_name)
+        private var lpokemon: LinearLayout = view.findViewById(R.id.l_pokemon)
 
         fun bind(item:JsonObject,context: Context){
             namePokemon.setText(item.get("name").asString)
+
 
             Ion.with(context)
                 .load(item.get("url").asString)
                 .asJsonObject()
                 .done { e, result ->
                     if(e == null){
+                        var url1: String = item.get("url").asString
+                        lpokemon.setOnClickListener {
+                            val intent = Intent(context, ActivityDetail::class.java)
+                            intent.putExtra("url",url1)
+                            context.startActivity(intent) }
                         if(!result.get("sprites").isJsonNull){
                             if(result.get("sprites").asJsonObject.get("front_default") != null){
                                 Log.i("Salida", result.get("sprites").asJsonObject.get("front_default").asString)

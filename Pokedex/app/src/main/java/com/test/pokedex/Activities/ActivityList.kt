@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -20,6 +21,7 @@ class ActivityList : AppCompatActivity() {
 
     private lateinit var linearLayoutManager:LinearLayoutManager
     private lateinit var adapter:AdapterList
+
 
     private lateinit var data: JsonArray
     private lateinit var dataNoUso: JSONArray
@@ -46,10 +48,7 @@ class ActivityList : AppCompatActivity() {
     }
 
     fun initializeListeners(){
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
     }
 
     fun initializeData(){
